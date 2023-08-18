@@ -6,7 +6,9 @@ const getUsers = () => {
       return data.rows;
     });
 };
-
+feature/Routes
+module.exports = { getUsers };
+=======
 
 //Get a single user from the database given their email.
 
