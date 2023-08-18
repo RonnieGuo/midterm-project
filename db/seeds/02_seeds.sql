@@ -1,9 +1,8 @@
-
-INSERT INTO resources (user_id, title, description, url, category) VALUES
-  (1, 'Introduction to SQL', 'A beginner-friendly SQL tutorial', 'https://www.sqltutorial.org/introduction-to-sql/', 'Video'),
-  (2, 'Advanced SQL Techniques', 'Learn advanced SQL querying', 'https://www.sqlshack.com/advanced-sql-techniques/', 'Video'),
-  (3, 'Getting Started with Python', 'Python programming basics', 'https://realpython.com/start-here/', 'Video'),
-  (4, 'Web Development Tutorial', 'Build a basic website from scratch', 'https://developer.mozilla.org/en-US/docs/Learn', 'Video'),
+ INSERT INTO resources (user_id, title, description, url, category) VALUES
+  (1, 'Introduction to SQL', 'A beginner-friendly SQL tutorial', 'https://www.example.com/sql-intro', 'Video'),
+  (2, 'Advanced SQL Techniques', 'Learn advanced SQL querying', 'https://www.example.com/advanced-sql', 'Video'),
+  (3, 'Getting Started with Python', 'Python programming basics', 'https://www.example.com/python-basics', 'Video'),
+    (4, 'Web Development Tutorial', 'Build a basic website from scratch', 'https://developer.mozilla.org/en-US/docs/Learn', 'Video'),
   (5, 'Introduction to Machine Learning', 'Overview of machine learning concepts', 'https://machinelearningmastery.com/what-is-machine-learning/', 'Video'),
   (6, 'Digital Art: Creating Stunning Graphics', 'Learn digital art techniques using software', 'https://www.digitalartsonline.co.uk/features/illustration/digital-art-tips-creative-coding/', 'Video'),
   (7, 'Cooking Adventures: Recipes and Stories', 'Exploring the world of cooking', 'https://www.bonappetit.com/', 'Blog'),
@@ -19,11 +18,24 @@ INSERT INTO resources (user_id, title, description, url, category) VALUES
   (17, 'Mindful Living: Stress Management', 'Tips for reducing stress and improving well-being', 'https://www.mindbodygreen.com/0-13914/9-essential-habits-for-a-happy-mind.html', 'Wellness'),
   (18, 'Parenting Tips and Advice', 'Guidance for effective parenting and child development', 'https://www.verywellfamily.com/parenting-4157077', 'Lifestyle'),
   (19, 'Art Appreciation: Famous Paintings', 'Explore iconic artworks from history', 'https://www.nationalgallery.org.uk/paintings', 'Art'),
-  (20, 'Literature Corner: Book Reviews', 'Discover new books and literary recommendations', 'https://www.goodreads.com/', 'Art'),
-  (21, 'Film Critiques and Movie News', 'Stay updated with the latest movie releases and reviews', 'https://www.rottentomatoes.com/', 'Art'),
-  (22, 'Music Exploration: Genres and Artists', 'Discover diverse music genres and artists', 'https://www.billboard.com/', 'Art'),
-  (23, 'Language Learning: Spanish Basics', 'Get started with basic Spanish phrases', 'https://www.duolingo.com/course/es/en/Learn-Spanish', 'Language'),
-  (24, 'French Language Essentials', 'Learn essential French phrases and vocabulary', 'https://www.fluentu.com/en/blog/french/french-vocabulary/', 'Language'),
-  (25, 'Japanese Language for Beginners', 'Start learning Japanese for communication and travel', 'https://www.tofugu.com/learn-japanese/', 'Language'),
-  (26, 'German Language Resources', 'Explore German language resources and lessons', 'https://www.dw.com/en/learn-german/s-2469', 'Language');
+  (20, 'Literature Corner: Book Reviews', 'Discover new books and literary recommendations', 'https://www.goodreads.com/', 'Art');
 
+ INSERT INTO likes (user_id, resource_id) VALUES
+  (1, 1),
+  (2, 1),
+  (3, 2),
+  (4, 3),
+  (5, 4),
+  (6, 4),
+  (7, 5),
+  (8, 5);
+
+ INSERT INTO comments (user_id, resource_id, comment_text, rating) VALUES
+  (1, 1, 'This SQL tutorial was really helpful!', 4.5),
+  (2, 1, 'I learned a lot from this video.', 4.2),
+  (3, 2, 'Great tutorial on Python basics.', 4.0),
+  (4, 3, 'The web development tutorial is excellent!', 4.8),
+  (5, 4, 'Introduction to Machine Learning was informative.', 4.3),
+  (6, 4, 'I found the explanation a bit confusing.', 3.5),
+  (7, 5, 'The blog on blogging is quite useful.', 4.1),
+  (8, 5, 'Not what I was expecting, but still interesting.', 3.7);
