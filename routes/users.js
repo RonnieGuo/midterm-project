@@ -6,10 +6,56 @@
  */
 
 const express = require('express');
-const router  = express.Router();
+const router = express.Router();
 
 router.get('/', (req, res) => {
   res.render('users');
-}); 
+});
+
+//login page
+router.get('/login', (req, res) => {
+  res.redirect('/login');
+});
+//registration page
+router.get('/register', (req, res) => {
+  res.redirect('/register');
+});
+//logout
+router.post('/logout', (req, res) => {
+  res.redirect('/');
+});
+//login user
+router.post("/login", (req, res) => {
+  const email = req.body.email;
+  const password = req.body.password;
+  if (!bcrypt.compareSync(password, user.password)) {
+    return res.send({ error: "error" });
+  }
+  req.session.userId = user.id;
+  res.send({
+    user: {
+      name: user.name,
+      email: user.email,
+      id: user.id,
+    },
+  });
+});
+//register new user
+router.post("/register", (req, res) => {
+  if (!req.body.email || !req.body.password) {
+    res.status(400).send("Please enter a valid email and password!");
+  } else if (emailExists(req.body.email)) {
+    return res.status(400).send('This email id already registered. Please <a href= "/login" >Login</a>!');
+  } else {
+    const userEmail = req.body.email;
+    const userPassword = req.body.password;
+    const userID = generateRandomString();
+    // **add a function to add data to database**
+    req.session.user_id = userID;
+    res.redirect("/");
+  }
+});
+
+
 
 module.exports = router;
