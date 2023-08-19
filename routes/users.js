@@ -6,7 +6,13 @@
  */
 
 const express = require('express');
+const { getUserWithEmail } = require('../db/queries/users');
 const router = express.Router();
+const { addUser } = require('../db/queries/users');
+const { addResource } = require('../db/queries/users');
+const { getUserResources } = require('../db/queries/users');
+const { comment } = require('../db/queries/users');
+const { like } = require('../db/queries/users');
 
 //homepage
 router.get('/', (req, res) => {
@@ -15,29 +21,26 @@ router.get('/', (req, res) => {
 
 //login page
 router.get('/login', (req, res) => {
-  res.redirect('/login');
+  // res.render('login');
+  res.status(200).send("ok");
 });
 
 //registration page
 router.get('/register', (req, res) => {
-  res.redirect('/register');
+  res.render('/register');
 });
 
 //login user
 router.post('/login', (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
-  if (!bcrypt.compareSync(password, user.password)) {
-    return res.send({ error: "error" });
-  }
-  req.session.userId = user.id;
-  //********************** add fn to log the user */
-  res.send({
-    user: {
-      name: user.name,
-      email: user.email,
-      id: user.id,
-    },
+  getUserWithEmail(email).then((user) => {
+    if (!user) {
+      return res.send({ error: "no user with that id" });
+    }
+    req.session.userId = user.id;
+    res.status(200).send("ok");
+    // res.redirect('/resources');
   });
 });
 
@@ -47,35 +50,48 @@ router.post('/logout', (req, res) => {
 });
 
 //register new user
-router.post("/register", (req, res) => {
-  if (!req.body.email || !req.body.password) {
-    res.status(400).send("Please enter a valid email and password!");
-  } else if (emailExists(req.body.email)) {
-    return res.status(400).send('This email id already registered. Please <a href= "/login" >Login</a>!');
-  } else {
-    const userEmail = req.body.email;
-    const userPassword = req.body.password;
-    const userID = generateRandomString();
-    // **add a function to add data to database**
-    req.session.user_id = userID;
-    res.redirect("/resources");
-  }
+router.post('/register', (req, res) => {
+  // if (!req.body.email || !req.body.password) {
+  //   res.status(400).send("Please enter a valid email and password!");
+  // } else if (emailExists(req.body.email)) {
+  //   return res.status(400).send('This email id already registered. Please <a href= "/login" >Login</a>!');
+  // } else {
+    const newUser = {
+      userEmail: req.body.email,
+      userPassword: req.body.password,
+      // userID: generateRandomString(),
+    }
+    //function to add data to database
+    addUser(newUser)
+    .then(() => {
+      // req.session.email = newUser.email;
+      // req.session.user_id = id;
+      // res.render('/resources');
+      res.status(200).send("ok");
+    })
+  // }
 });
 
 //New Resource page
 router.get('/resources/new', (req, res) => {
-  res.render('new_resource');
+  res.status(200).send("ok");
+  // res.render('new_resource');
 });
 
-router.post('resources/new', (req, res) => {
+router.post('/resources/new', (req, res) => {
   const newResource = {
     title: req.body.title,
     description: req.body.description,
     url: req.body.url,
     category: req.body.category,
   }
-  //***********************add fn to create new resource */
-  res.redirect('/resources');
+  const user = req.session.email;
+  // function to create new resource
+  addResource(newResource, user)
+  .then(() => {
+    res.status(200).send("ok");
+  // res.redirect('/resources');
+  });
 });
 
 //search route
@@ -90,15 +106,42 @@ router.get('/resources', (req, res) => {
 
 //view one resource
 router.get('/resources/:id', (req, res) => {
+  const resourceId = req.params.id;
+  getUserResources(resourceId)
+  .then(() => {
+    res.render('main', { resource: resource, comments: comments });
+  })
+});
 
-})
 //add comment
-
-//add rating
-
+router.post('/resources/:id/comment', (req, res) => {
+  const text = req.body.comment;
+  const resourceId = req.params.id;
+  const userId = req.session.user_id;
+  const rating = req.body.rating;
+  comment(userId, resourceId, text, rating)
+  .then(() => {
+    res.redirect('back');
+  })
+});
+// **********************note sure if likes route is correct**********************************
 //add like
+router.post('/resources/:id/like', (req, res) => {
+  if (!req.session.user_id) {
+    const message = 'Please login to like posts';
+    res.json({message});
+  } else {
+    const userId = req.session.user_id;
+    const resourceId = req.body.resource_id;
+    like(userId, resourceId)
+    .then(() => {
+      res.redirect('back');
+    })
+  }
+});
 
 //user profile page
+
 
 //user update profile page
 
