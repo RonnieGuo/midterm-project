@@ -123,21 +123,59 @@ const getUserResources = function (user_id, limit = 10) {
 
 //Add resource to database//
 
-const addResource = function (user_id, title, description, url, category) {
-  const query = `
-    INSERT INTO resources (user_id, title, description, url, category)
-    VALUES ($1, $2, $3, $4, $5)
-    RETURNING *;
-  `;
-  const values = [user_id, title, description, url, category];
-
+const addResource = function (newResource, user) {
+  getUserWithId(user)
+  .then((rows) => {
+    const userId = rows[0].id;
+    return userId;
+  })
+  .then((userId) => {
+   newResource.user_id = userId;
+   const query = `
+   INSERT INTO resources (newResource)
+   VALUES ($1)
+   RETURNING *;
+ `;
+  const values = [newResource];
   return db.query(query, values)
     .then(result => result.rows[0])
     .catch(err => {
       console.error(err.message);
       throw err;
     });
+  });
 };
+
+//add comments to resource
+
+const comment = function(userId, resourceId, text, rating) {
+  const query = `INSERT INTO comments (userId, resourceId, text, rating)
+  VALUES ($1, $2, $3, $4)
+  RETURNING *;
+  `;
+  const values = [userId, resourceId, text, rating];
+  return db.query(query, values)
+  .then(result => result.rows[0])
+  .catch(err => {
+    console.error(err.message);
+    throw err;
+  });
+};
+
+//like posts
+const like = function (userId, resourceId) {
+  const query = `INSERT INTO likes (userId, resourceId)
+  VALUES ($1, $2)
+  RETURNING *;
+  `;
+  const values = [userId, resourceId];
+  return db.query(query, values)
+  .then(result => result.rows[0])
+  .catch(err => {
+    console.error(err.message);
+    throw err;
+  });
+}
 
 module.exports = {
   getUsers,
@@ -146,6 +184,8 @@ module.exports = {
   addUser,
   getUserResources,
   addResource,
+  comment,
+  like,
 };
 
 
