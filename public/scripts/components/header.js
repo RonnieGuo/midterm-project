@@ -44,3 +44,4 @@ $(() => {
     updateHeader(json.user);
   });
 
+});
