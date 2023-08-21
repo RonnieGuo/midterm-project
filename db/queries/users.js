@@ -1,3 +1,4 @@
+const { query } = require('express');
 const db = require('../connection');
 
 const getUsers = () => {
@@ -146,6 +147,10 @@ const addResource = function (newResource, user) {
   });
 };
 
+//search
+
+
+
 //add comments to resource
 
 const comment = function(userId, resourceId, text, rating) {
@@ -177,6 +182,38 @@ const like = function (userId, resourceId) {
   });
 }
 
+// get user profile page
+
+const getUser = function(user) {
+  if(user.id.toString() === user.user_id) {
+    const query = `SELECT * FROM users
+    WHERE id = $1
+    LIMIT 1;
+    `;
+    const values = [user.id];
+    return db.query(query, values)
+    .then(result => result.rows[0])
+    .catch(err => {
+      console.error(err.message);
+      throw err;
+    });
+  } else {
+    console.log('no authorized user!');
+  }
+}
+
+//update user profile
+
+const updateUser = function(updatedUserInfo) {
+  const query = `UPDATE users
+  SET name = $1, email = $2, password = $3
+  WHERE id = $4;
+  `;
+  const values = updatedUserInfo;
+  return db.query(query, values);
+}
+
+
 module.exports = {
   getUsers,
   getUserWithEmail,
@@ -186,5 +223,7 @@ module.exports = {
   addResource,
   comment,
   like,
+  getUser,
+  updateUser
 };
 
