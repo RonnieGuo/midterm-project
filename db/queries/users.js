@@ -149,4 +149,44 @@ module.exports = {
   addResource,
 };
 
+//Update UserInformation
 
+const updateUserInformation = function (userId, newUsername, newEmail, newPassword) {
+  const query = `
+    UPDATE users
+    SET username = $2, email = $3, password = $4
+    WHERE id = $1;
+  `;
+  const values = [userId, newUsername, newEmail, newPassword];
+
+  return db.query(query, values)
+    .then(result => {
+      if (result.rowCount === 1) {
+        return "User information updated successfully.";
+      } else {
+        throw new Error("Update failed.");
+      }
+    })
+    .catch(err => {
+      console.log(err.message);
+    });
+};
+
+//Search Resources
+
+const searchResources = function (keyword) {
+  const query = `
+    SELECT id, title, description
+    FROM resources
+    WHERE title ILIKE '%' || $1 || '%' OR description ILIKE '%' || $1 || '%';
+  `;
+  const values = [keyword];
+
+  return db.query(query, values)
+    .then(result => {
+      return result.rows;
+    })
+    .catch(err => {
+      console.log(err.message);
+    });
+};
