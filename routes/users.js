@@ -140,7 +140,7 @@ router.post('/resources/:id/like', (req, res) => {
   }
 });
 
-//user profile page
+//user profile page.
 
 
 //user update profile page
