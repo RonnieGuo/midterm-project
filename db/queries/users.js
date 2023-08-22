@@ -1,3 +1,4 @@
+const { query } = require('express');
 const db = require('../connection');
 
 const getUsers = () => {
@@ -6,7 +7,6 @@ const getUsers = () => {
       return data.rows;
     });
 };
-
 
 //Get a single user from the database given their email.
 
@@ -124,21 +124,95 @@ const getUserResources = function (user_id, limit = 10) {
 
 //Add resource to database//
 
-const addResource = function (user_id, title, description, url, category) {
-  const query = `
-    INSERT INTO resources (user_id, title, description, url, category)
-    VALUES ($1, $2, $3, $4, $5)
-    RETURNING *;
-  `;
-  const values = [user_id, title, description, url, category];
-
+const addResource = function (newResource, user) {
+  getUserWithId(user)
+  .then((rows) => {
+    const userId = rows[0].id;
+    return userId;
+  })
+  .then((userId) => {
+   newResource.user_id = userId;
+   const query = `
+   INSERT INTO resources (newResource)
+   VALUES ($1)
+   RETURNING *;
+ `;
+  const values = [newResource];
   return db.query(query, values)
     .then(result => result.rows[0])
     .catch(err => {
       console.error(err.message);
       throw err;
     });
+  });
 };
+
+//search
+
+
+
+//add comments to resource
+
+const comment = function(userId, resourceId, text, rating) {
+  const query = `INSERT INTO comments (userId, resourceId, text, rating)
+  VALUES ($1, $2, $3, $4)
+  RETURNING *;
+  `;
+  const values = [userId, resourceId, text, rating];
+  return db.query(query, values)
+  .then(result => result.rows[0])
+  .catch(err => {
+    console.error(err.message);
+    throw err;
+  });
+};
+
+//like posts
+const like = function (userId, resourceId) {
+  const query = `INSERT INTO likes (userId, resourceId)
+  VALUES ($1, $2)
+  RETURNING *;
+  `;
+  const values = [userId, resourceId];
+  return db.query(query, values)
+  .then(result => result.rows[0])
+  .catch(err => {
+    console.error(err.message);
+    throw err;
+  });
+}
+
+// get user profile page
+
+const getUser = function(user) {
+  if(user.id.toString() === user.user_id) {
+    const query = `SELECT * FROM users
+    WHERE id = $1
+    LIMIT 1;
+    `;
+    const values = [user.id];
+    return db.query(query, values)
+    .then(result => result.rows[0])
+    .catch(err => {
+      console.error(err.message);
+      throw err;
+    });
+  } else {
+    console.log('no authorized user!');
+  }
+}
+
+//update user profile
+
+const updateUser = function(updatedUserInfo) {
+  const query = `UPDATE users
+  SET name = $1, email = $2, password = $3
+  WHERE id = $4;
+  `;
+  const values = updatedUserInfo;
+  return db.query(query, values);
+}
+
 
 //Update UserInformation
 
@@ -189,6 +263,11 @@ module.exports = {
   addUser,
   getUserResources,
   addResource,
-  updateUser,
   searchResources,
+  comment,
+  like,
+  getUser,
+  updateUser,
 };
+
+
