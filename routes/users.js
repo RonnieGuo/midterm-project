@@ -103,5 +103,5 @@ router.get('/resources/:id', (req, res) => {
 
 //user update profile page
 
-
+// ..
 module.exports = router;
