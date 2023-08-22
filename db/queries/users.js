@@ -140,18 +140,9 @@ const addResource = function (user_id, title, description, url, category) {
     });
 };
 
-module.exports = {
-  getUsers,
-  getUserWithEmail,
-  getUserWithId,
-  addUser,
-  getUserResources,
-  addResource,
-};
-
 //Update UserInformation
 
-const updateUserInformation = function (userId, newUsername, newEmail, newPassword) {
+const updateUser = function (userId, newUsername, newEmail, newPassword) {
   const query = `
     UPDATE users
     SET username = $2, email = $3, password = $4
@@ -189,4 +180,15 @@ const searchResources = function (keyword) {
     .catch(err => {
       console.log(err.message);
     });
+};
+
+module.exports = {
+  getUsers,
+  getUserWithEmail,
+  getUserWithId,
+  addUser,
+  getUserResources,
+  addResource,
+  updateUser,
+  searchResources,
 };
