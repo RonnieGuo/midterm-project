@@ -1,7 +1,7 @@
 $(() => {
   window.header = {};
 
-  const $pageHeader = $('#page-header');
+  const $pageHeader = $("#page-header");
   let currentUser = null;
   function updateHeader(user) {
     currentUser = user;
@@ -18,7 +18,7 @@ $(() => {
           <li class="sign-up_button">Sign Up</li>
         </ul>
       </nav>
-      `
+      `;
     } else {
       userLinks = `
       <nav id="page-header__user-links" class="page-header__user-links">
@@ -31,7 +31,7 @@ $(() => {
           <li class="logout_button">Log Out</li>
         </ul>
       </nav>
-      `
+      `;
     }
 
     $pageHeader.append(userLinks);
@@ -39,9 +39,7 @@ $(() => {
 
   window.header.update = updateHeader;
 
-  getMyDetails()
-    .then(function( json ) {
+  getMyDetails().then(function (json) {
     updateHeader(json.user);
   });
-
 });
