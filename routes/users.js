@@ -96,7 +96,12 @@ router.post('/resources/new', (req, res) => {
 
 //search route
 router.get('/resources/search', (req, res) => {
-
+  let query = req.query.query;
+  query = query.split(' ');
+  search(query)
+  .then(() => {
+    res.render('resources');
+  })
 })
 
 // //resources route to view all resources
