@@ -12,7 +12,7 @@ const { addUser } = require('../db/queries/users');
 const { addResource } = require('../db/queries/users');
 const { getUserResources } = require('../db/queries/users');
 const { comment } = require('../db/queries/users');
-const { like } = require('../db/queries/users');
+const { like, getUser, updateUser } = require('../db/queries/users');
 
 //homepage
 router.get('/', (req, res) => {
@@ -21,13 +21,13 @@ router.get('/', (req, res) => {
 
 //login page
 router.get('/login', (req, res) => {
-  // res.render('login');
-  res.status(200).send("ok");
+  res.render("login");
+  // res.status(200).send("ok");
 });
 
 //registration page
 router.get('/register', (req, res) => {
-  res.render('/register');
+  res.render('register');
 });
 
 //login user
@@ -74,8 +74,8 @@ router.post('/register', (req, res) => {
 
 //New Resource page
 router.get('/resources/new', (req, res) => {
-  res.status(200).send("ok");
-  // res.render('new_resource');
+  // res.status(200).send("ok");
+  res.render('create_resource');
 });
 
 router.post('/resources/new', (req, res) => {
@@ -99,10 +99,10 @@ router.get('/resources/search', (req, res) => {
 
 })
 
-//resources route to view all resources
-router.get('/resources', (req, res) => {
+// //resources route to view all resources
+// router.get('/resources', (req, res) => {
 
-})
+// })
 
 //view one resource
 router.get('/resources/:id', (req, res) => {
@@ -140,10 +140,33 @@ router.post('/resources/:id/like', (req, res) => {
   }
 });
 
-//user profile page.
-
+//user profile page
+router.get('/users/:id', (req, res) => {
+  const currentUser = {
+    id: req.session.user_id,
+    user_id: req.params.id
+  }
+  getUser(currentUser)
+  .then(() => {
+    res.status(200).send("ok");
+    // res.render('profile', {};)
+  })
+})
 
 //user update profile page
+router.post('/users/:id/update', (req, res) => {
+  const updatedUserInfo = {
+    name: req.body.name,
+    email: req.body.email,
+    password: req.body.password,
+    id: req.session.user_id
+  }
+  updateUser(updatedUserInfo)
+  .then(() => {
+    res.status(200).send("ok");
+    // res.render('profile', {})
+  });
 
+})
 
 module.exports = router;
