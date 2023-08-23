@@ -1,3 +1,4 @@
+const { query } = require('express');
 const db = require('../connection');
 
 const getUsers = () => {
@@ -146,6 +147,10 @@ const addResource = function (newResource, user) {
   });
 };
 
+//search
+
+
+
 //add comments to resource
 
 const comment = function(userId, resourceId, text, rating) {
@@ -177,28 +182,60 @@ const like = function (userId, resourceId) {
   });
 }
 
-//Update UserInformation
+// get user profile page
 
-const updateUser = function (userId, newUsername, newEmail, newPassword) {
-  const query = `
-    UPDATE users
-    SET username = $2, email = $3, password = $4
-    WHERE id = $1;
-  `;
-  const values = [userId, newUsername, newEmail, newPassword];
-
-  return db.query(query, values)
-    .then(result => {
-      if (result.rowCount === 1) {
-        return "User information updated successfully.";
-      } else {
-        throw new Error("Update failed.");
-      }
-    })
+const getUser = function(user) {
+  if(user.id.toString() === user.user_id) {
+    const query = `SELECT * FROM users
+    WHERE id = $1
+    LIMIT 1;
+    `;
+    const values = [user.id];
+    return db.query(query, values)
+    .then(result => result.rows[0])
     .catch(err => {
-      console.log(err.message);
+      console.error(err.message);
+      throw err;
     });
-};
+  } else {
+    console.log('no authorized user!');
+  }
+}
+
+//update user profile
+
+const updateUser = function(updatedUserInfo) {
+  const query = `UPDATE users
+  SET name = $1, email = $2, password = $3
+  WHERE id = $4;
+  `;
+  const values = updatedUserInfo;
+  return db.query(query, values);
+}
+
+
+// //Update UserInformation
+
+// const updateUser = function (userId, newUsername, newEmail, newPassword) {
+//   const query = `
+//     UPDATE users
+//     SET username = $2, email = $3, password = $4
+//     WHERE id = $1;
+//   `;
+//   const values = [userId, newUsername, newEmail, newPassword];
+
+//   return db.query(query, values)
+//     .then(result => {
+//       if (result.rowCount === 1) {
+//         return "User information updated successfully.";
+//       } else {
+//         throw new Error("Update failed.");
+//       }
+//     })
+//     .catch(err => {
+//       console.log(err.message);
+//     });
+// };
 
 //Search Resources
 
@@ -226,9 +263,10 @@ module.exports = {
   addUser,
   getUserResources,
   addResource,
+  searchResources,
   comment,
   like,
+  getUser,
   updateUser,
-  searchResources,
 };
 
