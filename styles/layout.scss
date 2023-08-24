@@ -1,6 +1,40 @@
 // See: https://sass-lang.com/
 
-body,
-html {
+
+@import url('https://fonts.googleapis.com/css2?family=Bungee&display=swap');
+
+  @import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300;0,600;1,300;1,600&display=swap');
+
+
+
+
+// body {
+//   display: flex;
+//   color: #545149;
+//   background-color: #f4f1ec;
+//   font-size: 20px;
+//   font-family: 'Source Sans 3', sans-serif;
+//   align-content: center;
+//   align-items: center;
+//   flex-direction: column;
+// }
+
+
+// html {
+//   margin: 0;
+// }
+
+
+* {
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Source Sans 3',sans-serif;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
 }

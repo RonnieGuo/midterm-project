@@ -7,6 +7,23 @@
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
 
+    <link rel="stylesheet" href="styles/login.scss">
+
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+
+<!-- Font -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link  href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300;0,600;1,300;1,600&display=swap" rel="stylesheet">
+
+
+
+
     <!-- Bootstrap CSS -->
     <link
       rel="stylesheet"
@@ -21,12 +38,17 @@
   <body>
     <%- include('partials/_header') %>
     <main style="margin: 1em;">
-      <!-- <h3>Registration form</h3> -->
-      <form method="POST" action = "/login">
+      <h3>Login form</h3>
+      <form method="POST" action="/login">
+
         <h6>Email Address</h6>
         <input type="email" name="email" placeholder="Email">
+        <i class='bx bxs-user' ></i>
+
         <h6>Password</h6>
         <input type="password" name="password" placeholder="Password">
+        <i class='bx bxs-lock-alt'></i>
+
         <h6></h6>
         <input type="submit" value="Login">
       </form>
