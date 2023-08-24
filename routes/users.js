@@ -39,8 +39,8 @@ router.post('/login', (req, res) => {
       return res.send({ error: "no user with that id" });
     }
     req.session.userId = user.id;
-    res.status(200).send("ok");
-    // res.redirect('/resources');
+    // res.status(200).send("ok");
+    res.redirect('/resources');
   });
 });
 
