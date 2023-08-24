@@ -6,28 +6,44 @@
   <title>Login</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300;0,600;1,300;1,600&display=swap" rel="stylesheet">
+
+
+  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" />
+  <link rel="stylesheet" href="/vendor/border-box.css" />
+  <link rel="stylesheet" href="/styles/main.css" />
+  <link rel="stylesheet" href="/styles/layout.css" />
+  <link rel="stylesheet" href="/styles/register.css" />
+
+
 </head>
-<%- include('partials/_header') %>
+
 <body>
 
-  </header>
 
-  <main style="margin: 1em;">
-    <h2>Create Account</h2>
+
+  <main class="box-wrap"  style="margin: 1em;">
+    <h1>Create Account</h1>
     <form method="POST" action="/register">
+
       <div class="form-group">
-        <label for="email">Email address</label>
-        <input type="email" class="form-control small-input" name="email" placeholder="Enter email" />
+        <h6>Email Address</h6>
+        <input type="email" class="form-control small-input" name="email" placeholder="Enter email" required/>
       </div>
+
       <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" class="form-control small-input" name="password" placeholder="password" />
+        <h6>Password</h6>
+        <input type="password" class="form-control small-input" name="password" placeholder="Enter password" required/>
       </div>
+
       <button type="submit" class="btn btn-primary">Register</button>
     </form>
   </div>
 
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 </body>
 </html>
