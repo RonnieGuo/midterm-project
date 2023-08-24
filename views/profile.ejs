@@ -1,29 +1,71 @@
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
-
-
   <head>
-  <%- include('partials/_header') %>
-  <title>Users</title>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
 
-  <meta charset="UTF-8" >
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" >
+    <link rel="stylesheet" href="/styles/header.css">
+    <link rel="stylesheet" href="/styles/login.css">
 
-  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" />
-  <link rel="stylesheet" href="/vendor/border-box.css" />
-  <link rel="stylesheet" href="/styles/main.css" />
-  <link rel="stylesheet" href="/styles/layout.css" />
-
-  <script src="/vendor/jquery-3.0.0.js"></script>
-  <script defer src="/scripts/users.js"></script>
-</head>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
 
-<body>
-  <h1>Users</h1>
-  <button id="fetch-users">Fetch Users via AJAX</button>
-  <ul id="users"></ul>
-</body>
+<!-- Font -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link  href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" rel="stylesheet">
 
-</html> -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300;0,600;1,300;1,600&display=swap" rel="stylesheet">
+
+
+    <title>Profile</title>
+  </head>
+
+
+  <body>
+
+
+    <main class="wrap" style="margin: 1em;">
+      <form method="POST" action="/login">
+
+        <h1>Profile</h1>
+
+        <div class="First name">
+            <h6>First name</h6>
+            <input type="First name" name="First name" placeholder="First name" required>
+            <i class='bx bxs-user' ></i>
+        </div>
+
+        <div class="last-name">
+          <h6>Last name</h6>
+          <input type="Last name" name="Last name" placeholder="Last name" required>
+          <i class='bx bxs-lock-alt'></i>
+        </div>
+
+
+        <div class="about">
+          <h6>About</h6>
+          <input type="about" name="about" placeholder="Tell your story" required>
+          <i class='bx bxs-user' ></i>
+      </div>
+
+      <div class="Username">
+        <h6>Username</h6>
+        <input type="Username" name="Username" placeholder="Username" required>
+        <i class='bx bxs-lock-alt'></i>
+      </div>
+
+        <button type="submit" class="btn">Save</button>
+      </form>
+
+        </div>
+      </form>
+    </main>
+
+  </body>
+</html>
