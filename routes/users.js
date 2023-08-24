@@ -21,13 +21,13 @@ router.get('/', (req, res) => {
 
 //login page
 router.get('/login', (req, res) => {
-  res.render("login");
+  res.render("login", {user: null});
   // res.status(200).send("ok");
 });
 
 //registration page
 router.get('/register', (req, res) => {
-  res.render('register');
+  res.render('register', {user: null});
 });
 
 //login user
@@ -39,8 +39,8 @@ router.post('/login', (req, res) => {
       return res.send({ error: "no user with that id" });
     }
     req.session.userId = user.id;
-    res.status(200).send("ok");
-    // res.redirect('/resources');
+    // res.status(200).send("ok");
+    res.redirect('/resources');
   });
 });
 

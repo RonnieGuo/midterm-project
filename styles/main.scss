@@ -1,3 +1,11 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Source Sans 3',sans-serif;
+}
+
+
 body {
   display: flex;
   flex-direction: column;
@@ -16,3 +24,4 @@ body {
     rgba(163, 208, 219, 1) 100%
   );
 }
+
