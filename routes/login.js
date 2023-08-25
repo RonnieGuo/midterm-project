@@ -129,4 +129,6 @@ router.post("/resources/:id/comment", (req, res) => {
     res.redirect("back");
   });
 });
+
+
 module.exports = router;

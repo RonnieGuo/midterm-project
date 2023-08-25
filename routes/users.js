@@ -160,6 +160,7 @@ router.get('/users', (req, res) => {
     res.send("Please login to view your profile page");
     return;
   }
+  console.log('userid', req.session.user_id);
   getUser(req.session.user_id)
   .then((user) => {
     // res.status(200).send("ok");
@@ -170,14 +171,14 @@ router.get('/users', (req, res) => {
 //user update profile page
 router.post("/users/:id/update", (req, res) => {
   const updatedUserInfo = {
-    name: req.body.name,
+    username: req.body.name,
     email: req.body.email,
     password: req.body.password,
     id: req.session.user_id,
   };
-  updateUser(updatedUserInfo).then(() => {
+  updateUser(updatedUserInfo).then((user) => {
     // res.status(200).send("ok");
-    res.render('profile', {user: null});
+    res.render('profile', { user });
   });
 });
 

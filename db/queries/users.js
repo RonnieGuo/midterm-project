@@ -225,7 +225,7 @@ const like = function (userId, resourceId) {
 // get user profile page
 
 const getUser = function(user_id) {
-  console.log('user', user);
+  // console.log('user', user);
     const query = `SELECT * FROM users
     WHERE id = $1
     LIMIT 1;
@@ -243,10 +243,10 @@ const getUser = function(user_id) {
 
 const updateUser = function(updatedUserInfo) {
   const query = `UPDATE users
-  SET name = $1, email = $2, password = $3
+  SET username = $1, email = $2, password = $3
   WHERE id = $4;
   `;
-  const values = updatedUserInfo;
+  const values = [updatedUserInfo.username, updatedUserInfo.email, updatedUserInfo.password, updatedUserInfo.id];
   return db.query(query, values);
 }
 
