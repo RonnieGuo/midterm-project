@@ -1,0 +1,73 @@
+<% include partials/_header %>
+<body>
+
+  <main class="container">
+    <div class="row">
+      <h2 class="col-12"><%= resource.title %></h2>
+
+    </div>
+    <div class="row">
+
+      <div class="col-md-8 resource-field">
+        <!-- <img src="<%= resource.img %>" width="500" height="333"> -->
+        <br><br>
+        <% for (let element of results) { %>
+          <tr>
+            <td><%= element.title %></td><br>
+            <td><%= element.description %></td><br>
+            <td><%= element.url %></td><br>
+            <td><%= element.category %></td><br>
+            <td><%= element.likes_count %></td><br>
+            <td><%= element.comments_count %></td><br>
+
+          </tr>
+        <% } %>
+        <!-- <p><%= resource.description %></p>
+        <div class="rate">
+          <form action="/resources/<%= resource.id %>/rate" method="POST">
+            <div class="rate form-group">
+                <input type="radio" id="star5" name="rate" value="5" />
+                <label for="star5" title="text">5 stars</label>
+                <input type="radio" id="star4" name="rate" value="4" />
+                <label for="star4" title="text">4 stars</label>
+                <input type="radio" id="star3" name="rate" value="3" />
+                <label for="star3" title="text">3 stars</label>
+                <input type="radio" id="star2" name="rate" value="2" />
+                <label for="star2" title="text">2 stars</label>
+                <input type="radio" id="star1" name="rate" value="1" />
+                <label for="star1" title="text">1 star</label>
+
+              </div>
+              <button type="submit" class="btn btn-success btn-sm rate-button">Rate</button>
+            </form>
+        </div> -->
+
+
+      </div>
+      <div class="col-md-4">
+        <form method="POST" action="/resources/<%=resource.id %>/comment" class="">
+            <h4>Comments</h4>
+            <div class="form-group">
+              <textarea placeholder="How do you like this resource?" class="form-control" name="comment"></textarea>
+              <br>
+              <button type="submit" class="btn btn-success btn-sm form-control"><i class="fas fa-plus"></i> Add Comments</button>
+            </div>
+        </form>
+        <div>
+          <% for (var i = comments.length -1; i >= 0; i--) { %>
+            <div class="comment">
+              <p><%= comments[i].text %></p>
+              <small>
+                <strong><%= comments[i].created_at%></strong>
+                  -  <%= comments[i].name %>
+              </small>
+            </div>
+            <hr>
+          <% } %>
+        </div>
+      </div>
+    </div>
+  </main>
+
+</body>
+</html>

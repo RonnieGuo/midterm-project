@@ -72,47 +72,59 @@ const addUser = function (user) {
 //users should be able to view all their own and all liked resources on one page ("My resources")
 
 
-const getUserResources = function (user_id, limit = 10) {
-  const query = `
-    SELECT
-      'own' AS source,
-      resources.id,
-      resources.title,
-      resources.description,
-      resources.url,
-      resources.category,
-      COUNT(likes.id) AS likes_count,
-      COUNT(comments.id) AS comments_count
-    FROM resources
-    LEFT JOIN likes ON resources.id = likes.resource_id
-    LEFT JOIN comments ON resources.id = comments.resource_id
-    WHERE resources.user_id = $1
-    GROUP BY resources.id
-    ORDER BY resources.id
-    LIMIT $2;
+const getUserResources = function (user_id) {
 
-    UNION ALL
-
-    SELECT
-      'liked' AS source,
-      resources.id,
-      resources.title,
-      resources.description,
-      resources.url,
-      resources.category,
-      COUNT(likes.id) AS likes_count,
-      COUNT(comments.id) AS comments_count
-
-    FROM resources
-    JOIN likes ON resources.id = likes.resource_id
-    LEFT JOIN comments ON resources.id = comments.resource_id
-    WHERE likes.user_id = $1
-    GROUP BY resources.id
-    ORDER BY resources.id
-    LIMIT $2;
-  `;
-  const values = [user_id, limit];
-
+  // // const field = ['resources.id', 'title', 'url', 'description', 'topic']
+  // const query = `SELECT id, title, url, description, category FROM resources
+  //  `;
+  //  db.query()
+  //  .then((resources) => {
+  //   const allResources = resources;
+  //   allResources.forEach(element => {
+  //     element.likes = 0;
+  //   });
+  //  })
+  //  .then(() => {
+  //   const query2 = `SELECT resources.id FROM resources
+  //   JOIN likes
+  //   ON likes.resource_id = resources.id
+  //   GROUP BY resources.id
+  //   COUNT *;
+  //   `;
+  //   db.query2()
+  //   .then((rows) => {
+  //     allResources.forEach((resource) => {
+  //       rows.forEach((row) => {
+  //         if(resource.id === row.id) {
+  //           resource.likes = row.count;
+  //         }
+  //       })
+  //     })
+  //   })
+  //  })
+  //  .then(() => {
+  //   allResources.forEach((resource) => {
+  //     resource.img = randomImage();
+  //   })
+  //   callback(allResources);
+  // })
+// }
+  const values = [user_id];
+  const query  = `SELECT
+  'own' AS source,
+  resources.id,
+  resources.title,
+  resources.description,
+  resources.url,
+  resources.category,
+  COUNT(likes.id) AS likes_count,
+  COUNT(comments.id) AS comments_count
+FROM resources
+LEFT JOIN likes ON resources.id = likes.resource_id
+LEFT JOIN comments ON resources.id = comments.resource_id
+WHERE resources.user_id = $1
+GROUP BY resources.id
+ORDER BY resources.id;`
   return db.query(query, values)
     .then(result => result.rows)
     .catch(err => {
@@ -125,27 +137,55 @@ const getUserResources = function (user_id, limit = 10) {
 //Add resource to database//
 
 const addResource = function (newResource, user) {
-  getUserWithId(user)
-  .then((rows) => {
-    const userId = rows[0].id;
-    return userId;
-  })
-  .then((userId) => {
-   newResource.user_id = userId;
-   const query = `
-   INSERT INTO resources (newResource)
-   VALUES ($1)
-   RETURNING *;
- `;
-  const values = [newResource];
-  return db.query(query, values)
-    .then(result => result.rows[0])
+  return getUserWithId(user)
+    .then((rows) => {
+      if (!rows || rows.length === 0) {
+        throw new Error("User not found or empty rows");
+      }
+      const userId = rows.id;
+      newResource.user_id = userId;
+      const query = `
+        INSERT INTO resources (title, description, url, category, user_id)
+        VALUES ($1, $2, $3, $4, $5)
+        RETURNING *;
+      `;
+      const values = [newResource.title, newResource.description, newResource.url, newResource.category, userId];
+      return db.query(query, values)
+        .then(result => result.rows[0])
+        .catch(err => {
+          console.error(err.message);
+          throw err;
+        });
+    })
     .catch(err => {
       console.error(err.message);
       throw err;
     });
-  });
 };
+// const addResource = function (newResource, user) {
+//   console.log('function', getUserWithId(user));
+//   getUserWithId(user)
+//   .then((rows) => {
+//     // console.log('rows', rows);
+//     const userId = rows[0].id;
+//     return userId;
+//   })
+//   .then((userId) => {
+//    newResource.user_id = userId;
+//    const query = `
+//    INSERT INTO resources (newResource)
+//    VALUES ($1)
+//    RETURNING *;
+//  `;
+//   const values = [newResource];
+//   return db.query(query, values)
+//     .then(result => result.rows[0])
+//     .catch(err => {
+//       console.error(err.message);
+//       throw err;
+//     });
+//   });
+// };
 
 //search
 
@@ -184,22 +224,19 @@ const like = function (userId, resourceId) {
 
 // get user profile page
 
-const getUser = function(user) {
-  if(user.id.toString() === user.user_id) {
+const getUser = function(user_id) {
+  console.log('user', user);
     const query = `SELECT * FROM users
     WHERE id = $1
     LIMIT 1;
     `;
-    const values = [user.id];
+    const values = [user_id];
     return db.query(query, values)
     .then(result => result.rows[0])
     .catch(err => {
       console.error(err.message);
       throw err;
     });
-  } else {
-    console.log('no authorized user!');
-  }
 }
 
 //update user profile
@@ -248,13 +285,14 @@ const searchResources = function (keyword) {
   const values = [keyword];
 
   return db.query(query, values)
-    .then(result => {
+    .then((result) => {
       return result.rows;
     })
     .catch(err => {
       console.log(err.message);
     });
 };
+
 
 module.exports = {
   getUsers,
@@ -268,5 +306,6 @@ module.exports = {
   like,
   getUser,
   updateUser,
+  searchResources,
 };
 
