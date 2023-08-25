@@ -1,4 +1,4 @@
-<% include partials/_header %>
+<!--<% include partials/_header %>
 <body>
 
   <main class="container">
@@ -9,7 +9,7 @@
     <div class="row">
 
       <div class="col-md-8 resource-field">
-        <!-- <img src="<%= resource.img %>" width="500" height="333"> -->
+        <img src="<%= resource.img %>" width="500" height="333"> -->
         <br><br>
         <% for (let element of results) { %>
           <tr>
@@ -19,9 +19,12 @@
             <td><%= element.category %></td><br>
             <td><%= element.likes_count %></td><br>
             <td><%= element.comments_count %></td><br>
+            <!-- <td><%=  %></td><br> -->
 
           </tr>
         <% } %>
+        <p><%= comments.comment_text %></p>
+
         <!-- <p><%= resource.description %></p>
         <div class="rate">
           <form action="/resources/<%= resource.id %>/rate" method="POST">
@@ -45,7 +48,8 @@
 
       </div>
       <div class="col-md-4">
-        <form method="POST" action="/resources/<%=resource.id %>/comment" class="">
+        <p>Resource ID: <%= resource.id %></p>
+        <form method="POST" action="/resources/<%= resource.id %>/comment" class="">
             <h4>Comments</h4>
             <div class="form-group">
               <textarea placeholder="How do you like this resource?" class="form-control" name="comment"></textarea>
@@ -56,7 +60,7 @@
         <div>
           <% for (var i = comments.length -1; i >= 0; i--) { %>
             <div class="comment">
-              <p><%= comments[i].text %></p>
+              <p><%= comments[i].comment_text %></p>
               <small>
                 <strong><%= comments[i].created_at%></strong>
                   -  <%= comments[i].name %>
