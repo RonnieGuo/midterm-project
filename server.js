@@ -44,8 +44,8 @@ app.use('/users', usersRoutes);
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 
-app.get('/index', (req, res) => {
-  res.render('index', {user:{}});
+app.get('/homepage', (req, res) => {
+  res.render('homepage', {user:{}});
 });
 
 app.listen(PORT, () => {
