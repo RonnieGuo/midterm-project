@@ -7,7 +7,7 @@
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
 
-    <link rel="stylesheet" href="/styles/header.css">
+
     <link rel="stylesheet" href="/styles/login.css">
 
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -26,11 +26,15 @@
     <title>Login</title>
   </head>
 
+  <header>
+    <%- include('partials/_header') %>
+  </header>
+
 
   <body>
 
 
-    <main class="wrap" style="margin: 1em;">
+    <main class="wrap" >
       <form method="POST" action="/login">
 
         <h1>Login</h1>

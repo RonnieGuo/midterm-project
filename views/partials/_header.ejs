@@ -4,7 +4,7 @@
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Navbar</title>
 
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
@@ -12,30 +12,35 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300;0,600;1,300;1,600&display=swap" rel="stylesheet">
 
+    <link rel="stylesheet" href="/styles/header.css" />
 
-  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" />
-  <link rel="stylesheet" href="/vendor/border-box.css" />
-  <link rel="stylesheet" href="/styles/main.css" />
-  <link rel="stylesheet" href="/styles/layout.css" />
-  <link rel="stylesheet" href="/styles/header.css" />
+
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 
   <script src="/vendor/jquery-3.0.0.js"></script>
   <script defer src="/scripts/app.js"></script>
 
 </head>
 
+<body>
 
-<div class="container">
-  <nav>
-    <img src="images/logo.png" class="logo">
-    <ul>
-      <li><a href="#">My Resource</a></li>
-      <li><a href="#">Create New Resource</a></li>
-      <li><a href="#">Search Resource</a></li>
-    </ul>
-    <button type="submit" class="btn">Logout</button>
-  </nav>
-</div>
+
+    <nav>
+      <input type="checkbox" id="check">
+      <label for="check" class="checkbtn">
+        <i class="fas fa-bars"></i>
+      </label>
+      <img src="/images/logo.png" class="logo">
+      <ul>
+        <li><a href="#">My Resource</a></li>
+        <li><a href="/resources/new">Create New Resource</a></li>
+        <li><a href="/homepage">Search Resource</a></li>
+      </ul>
+
+    </nav>
+
+
+</body>
 
 
 
@@ -76,7 +81,7 @@
 
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav ml-auto text-right"> -->
-      <% if (user && user.id) { %>
+      <!-- <% if (user && user.id) { %>
 
         <p class="navbar-text">
           Sign in as: <strong><%= user.email %></strong>
@@ -93,5 +98,5 @@
         </div>
       </div>
     </nav>
-  </header>
+  </header> -->
   </html>

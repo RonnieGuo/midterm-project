@@ -5,8 +5,8 @@
  * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
  */
 
-const express = require('express');
-const { getUserWithEmail } = require('../db/queries/users');
+const express = require("express");
+const { getUserWithEmail } = require("../db/queries/users");
 const router = express.Router();
 const { addUser } = require('../db/queries/users');
 const { addResource } = require('../db/queries/users');
@@ -15,8 +15,8 @@ const { comment } = require('../db/queries/users');
 const { like, getUser, updateUser, searchResources } = require('../db/queries/users');
 
 //homepage
-router.get('/', (req, res) => {
-  res.render('users');
+router.get("/", (req, res) => {
+  res.render("users");
 });
 
 //login page
@@ -118,38 +118,35 @@ router.post('/logout', (req, res) => {
 // });
 
 //view one resource
-router.get('/resources/:id', (req, res) => {
+router.get("/resources/:id", (req, res) => {
   const resourceId = req.params.id;
-  getUserResources(resourceId)
-  .then(() => {
-    res.render('main', { resource: resource, comments: comments });
-  })
+  getUserResources(resourceId).then(() => {
+    res.render("main", { resource: resource, comments: comments });
+  });
 });
 
 //add comment
-router.post('/resources/:id/comment', (req, res) => {
+router.post("/resources/:id/comment", (req, res) => {
   const text = req.body.comment;
   const resourceId = req.params.id;
   const userId = req.session.user_id;
   const rating = req.body.rating;
-  comment(userId, resourceId, text, rating)
-  .then(() => {
-    res.redirect('back');
-  })
+  comment(userId, resourceId, text, rating).then(() => {
+    res.redirect("back");
+  });
 });
 // **********************note sure if likes route is correct**********************************
 //add like
-router.post('/resources/:id/like', (req, res) => {
+router.post("/resources/:id/like", (req, res) => {
   if (!req.session.user_id) {
-    const message = 'Please login to like posts';
-    res.json({message});
+    const message = "Please login to like posts";
+    res.json({ message });
   } else {
     const userId = req.session.user_id;
     const resourceId = req.body.resource_id;
-    like(userId, resourceId)
-    .then(() => {
-      res.redirect('back');
-    })
+    like(userId, resourceId).then(() => {
+      res.redirect("back");
+    });
   }
 });
 
@@ -171,19 +168,17 @@ router.get('/users', (req, res) => {
 })
 
 //user update profile page
-router.post('/users/:id/update', (req, res) => {
+router.post("/users/:id/update", (req, res) => {
   const updatedUserInfo = {
     name: req.body.name,
     email: req.body.email,
     password: req.body.password,
-    id: req.session.user_id
-  }
-  updateUser(updatedUserInfo)
-  .then(() => {
-    res.status(200).send("ok");
-    // res.render('profile', {})
+    id: req.session.user_id,
+  };
+  updateUser(updatedUserInfo).then(() => {
+    // res.status(200).send("ok");
+    res.render('profile', {user: null});
   });
-
-})
+});
 
 module.exports = router;
