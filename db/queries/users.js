@@ -137,27 +137,55 @@ ORDER BY resources.id;`
 //Add resource to database//
 
 const addResource = function (newResource, user) {
-  getUserWithId(user)
-  .then((rows) => {
-    const userId = rows[0].id;
-    return userId;
-  })
-  .then((userId) => {
-   newResource.user_id = userId;
-   const query = `
-   INSERT INTO resources (newResource)
-   VALUES ($1)
-   RETURNING *;
- `;
-  const values = [newResource];
-  return db.query(query, values)
-    .then(result => result.rows[0])
+  return getUserWithId(user)
+    .then((rows) => {
+      if (!rows || rows.length === 0) {
+        throw new Error("User not found or empty rows");
+      }
+      const userId = rows.id;
+      newResource.user_id = userId;
+      const query = `
+        INSERT INTO resources (title, description, url, category, user_id)
+        VALUES ($1, $2, $3, $4, $5)
+        RETURNING *;
+      `;
+      const values = [newResource.title, newResource.description, newResource.url, newResource.category, userId];
+      return db.query(query, values)
+        .then(result => result.rows[0])
+        .catch(err => {
+          console.error(err.message);
+          throw err;
+        });
+    })
     .catch(err => {
       console.error(err.message);
       throw err;
     });
-  });
 };
+// const addResource = function (newResource, user) {
+//   console.log('function', getUserWithId(user));
+//   getUserWithId(user)
+//   .then((rows) => {
+//     // console.log('rows', rows);
+//     const userId = rows[0].id;
+//     return userId;
+//   })
+//   .then((userId) => {
+//    newResource.user_id = userId;
+//    const query = `
+//    INSERT INTO resources (newResource)
+//    VALUES ($1)
+//    RETURNING *;
+//  `;
+//   const values = [newResource];
+//   return db.query(query, values)
+//     .then(result => result.rows[0])
+//     .catch(err => {
+//       console.error(err.message);
+//       throw err;
+//     });
+//   });
+// };
 
 //search
 
@@ -257,13 +285,14 @@ const searchResources = function (keyword) {
   const values = [keyword];
 
   return db.query(query, values)
-    .then(result => {
+    .then((result) => {
       return result.rows;
     })
     .catch(err => {
       console.log(err.message);
     });
 };
+
 
 module.exports = {
   getUsers,

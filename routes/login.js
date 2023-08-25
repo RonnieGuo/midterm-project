@@ -14,9 +14,12 @@ const generateRandomString = function () {
   return id;
 };
 
+router.get('/homepage', (req, res) => {
+  res.render('homepage', { user:{} });
+});
+
 //login user
 router.post('/login', (req, res) => {
-  console.log("hey");
   const email = req.body.email;
   const password = req.body.password;
   getUserWithEmail(email).then((user) => {
@@ -56,14 +59,33 @@ router.post('/register', (req, res) => {
 
 //resources route to view all resources
 router.get('/resources', (req, res) => {
-  console.log(req.session);
   // getUserResources((allResources) => {
   //   res.render('resources', { allResources });
   // })
   getUserResources(req.session.user_id)
   .then((results) => {
+    console.log(req.session.user_id);
     res.render('resources', { results, user: {} });
   })
+});
+
+//view one resource
+router.get("/resources/:id", (req, res) => {
+  const resourceId = req.params.id;
+  let resource ="";
+  let comments="";
+  getUserResources(resourceId).then((results) => {
+    results.forEach(element => {
+      resource = element;
+      comments = element.comments_count;
+      console.log('element', element);
+      // res.render("main", {resource, comments, results, user: {} });
+    })
+    // console.log('results', results[0].comments_count);
+    // let resource = results[0];
+    // let comments = results[0].comments_count;
+    res.render("main", {resource: resource, comments: comments, user: {} });
+  });
 });
 
 //New Resource page
@@ -80,10 +102,10 @@ router.post('/resources/new', (req, res) => {
     url: req.body.url,
     category: req.body.category,
   }
-  const user = req.session.email;
+  const user = req.session.user_id;
   // function to create new resource
   addResource(newResource, user)
-  .then(() => {
+  .then((result) => {
     // res.status(200).send("ok");
   res.redirect('/resources');
   });
@@ -91,12 +113,21 @@ router.post('/resources/new', (req, res) => {
 
 //search route
 router.get('/resources/search', (req, res) => {
-  let query = req.query.query;
-  query = query.split(' ');
+  let query = req.query.text;
   searchResources(query)
-  .then(() => {
-    res.render('resources');
+  .then((results) => {
+    res.render('resources', {user:{}, results});
   })
-})
+});
 
+//add comment
+router.post("/resources/:id/comment", (req, res) => {
+  const text = req.body.comment;
+  const resourceId = req.params.id;
+  const userId = req.session.user_id;
+  const rating = req.body.rating;
+  comment(userId, resourceId, text, rating).then(() => {
+    res.redirect("back");
+  });
+});
 module.exports = router;

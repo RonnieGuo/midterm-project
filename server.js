@@ -9,6 +9,8 @@ const morgan = require('morgan');
 
 const PORT = process.env.PORT || 8080;
 const app = express();
+app.use(express.urlencoded({ extended: true }));
+
 app.use(cookieSession({
   name: 'session',
   keys: ["supersecretKey", "anotherSuperSecretKet","df1718d9-9064-436d-bf71-f52fc9b7ee48"],
@@ -52,9 +54,9 @@ app.use('/', loginRoutes);
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 
-app.get('/homepage', (req, res) => {
-  res.render('homepage', {user:{}});
-});
+// app.get('/homepage', (req, res) => {
+//   res.render('homepage', {user:{}});
+// });
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);

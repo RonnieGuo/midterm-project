@@ -117,24 +117,24 @@ router.post('/logout', (req, res) => {
 //   })
 // });
 
-//view one resource
-router.get("/resources/:id", (req, res) => {
-  const resourceId = req.params.id;
-  getUserResources(resourceId).then(() => {
-    res.render("main", { resource: resource, comments: comments });
-  });
-});
+// //view one resource
+// router.get("/resources/:id", (req, res) => {
+//   const resourceId = req.params.id;
+//   getUserResources(resourceId).then(() => {
+//     res.render("main", { resource: resource, comments: comments });
+//   });
+// });
 
-//add comment
-router.post("/resources/:id/comment", (req, res) => {
-  const text = req.body.comment;
-  const resourceId = req.params.id;
-  const userId = req.session.user_id;
-  const rating = req.body.rating;
-  comment(userId, resourceId, text, rating).then(() => {
-    res.redirect("back");
-  });
-});
+// //add comment
+// router.post("/resources/:id/comment", (req, res) => {
+//   const text = req.body.comment;
+//   const resourceId = req.params.id;
+//   const userId = req.session.user_id;
+//   const rating = req.body.rating;
+//   comment(userId, resourceId, text, rating).then(() => {
+//     res.redirect("back");
+//   });
+// });
 // **********************note sure if likes route is correct**********************************
 //add like
 router.post("/resources/:id/like", (req, res) => {

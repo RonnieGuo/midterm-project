@@ -28,14 +28,16 @@
           <li><a href="#">Create New Resource</a></li>
           <li><a href="#">Search Resource</a></li>
         </ul>
-        <button type="submit" class="btn">Login</button>
+        <form method="GET" action="/users/login">
+        <button  type="submit" class="btn">Login</button>
+      </form>
       </nav>
 
       <div class="content">
         <h1>Welcome<br> to Resource Wall</h1>
         <p>Where ideas are made and shared with the world</p>
-        <form>
-          <input type="text" placeholder="Resource Name">
+        <form method="GET" action="/resources/search">
+          <input type="text" name="text" placeholder="Resource Name">
           <button type="submit" class="btn">Search</button>
         </form>
       </div>
