@@ -21,13 +21,13 @@ router.get('/', (req, res) => {
 
 //login page
 router.get('/login', (req, res) => {
-  res.render("login");
+  res.render("login", {user:{}});
   // res.status(200).send("ok");
 });
 
 //registration page
 router.get('/register', (req, res) => {
-  res.render('register');
+  res.render('register', {user:{}});
 });
 
 //login user
@@ -66,8 +66,8 @@ router.post('/register', (req, res) => {
     .then(() => {
       // req.session.email = newUser.email;
       // req.session.user_id = id;
-      // res.render('/resources');
-      res.status(200).send("ok");
+      res.render('/resources');
+      // res.status(200).send("ok");
     })
   // }
 });
