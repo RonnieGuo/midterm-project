@@ -1,12 +1,22 @@
 
 const express = require('express');
-const { getUserWithEmail } = require('../db/queries/users');
 const router = express.Router();
-const { addUser } = require('../db/queries/users');
-const { addResource } = require('../db/queries/users');
-const { getUserResources } = require('../db/queries/users');
-const { comment } = require('../db/queries/users');
-const { like, getUser, updateUser, searchResources } = require('../db/queries/users');
+
+const {
+  getUsers,
+  getUserWithEmail,
+  getUserWithId,
+  addUser,
+  getUserResources,
+  addResource,
+  searchResources,
+  comment,
+  like,
+  getUser,
+  updateUser,
+  getResourceById,
+  getComments,
+} = require('../db/queries/users');
 
 const generateRandomString = function () {
   // const id = Math.random().toString(16).substring(2, 8);
@@ -73,13 +83,15 @@ router.get('/resources', (req, res) => {
 router.get("/resources/:id", (req, res) => {
   const resourceId = req.params.id;
   let resource ="";
-  let comments="";
-  getUserResources(resourceId).then((results) => {
+  // let comments="";
+  let comments = getComments(resourceId);
+  getResourceById(resourceId).then((results) => {
     // results.forEach(element => {
     //   resource = element;
     //   comments = element.comments_count;
-    //   console.log('element', element);
-      res.render("main", {resource, comments, results, user: {} });
+      console.log('results----', results);
+      // console.log('comments--', comments1);
+      res.render("main", {resource: results[0], comments, results, user: {} });
     // console.log('results', results[0].comments_count);
     // let resource = results[0];
     // let comments = results[0].comments_count;
@@ -121,6 +133,7 @@ router.get('/resources/search', (req, res) => {
 
 //add comment
 router.post("/resources/:id/comment", (req, res) => {
+  console.log("helllo----")
   const text = req.body.comment;
   const resourceId = req.params.id;
   const userId = req.session.user_id;

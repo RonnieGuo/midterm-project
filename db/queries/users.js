@@ -133,6 +133,33 @@ ORDER BY resources.id;`
     });
 };
 
+const getResourceById = (resource_id) => {
+
+  const values = [resource_id];
+  const query  = `SELECT
+  'own' AS source,
+  resources.id,
+  resources.title,
+  resources.description,
+  resources.url,
+  resources.category,
+  COUNT(likes.id) AS likes_count,
+  COUNT(comments.id) AS comments_count
+FROM resources
+LEFT JOIN likes ON resources.id = likes.resource_id
+LEFT JOIN comments ON resources.id = comments.resource_id
+WHERE resources.id = $1
+GROUP BY resources.id
+ORDER BY resources.id;`
+return db.query(query, values)
+    .then(result => result.rows)
+    .catch(err => {
+      console.error(err.message);
+      throw err;
+    });
+
+}
+
 
 //Add resource to database//
 
@@ -194,7 +221,7 @@ const addResource = function (newResource, user) {
 //add comments to resource
 
 const comment = function(userId, resourceId, text, rating) {
-  const query = `INSERT INTO comments (userId, resourceId, text, rating)
+  const query = `INSERT INTO comments (user_id, resource_id, comment_text, rating)
   VALUES ($1, $2, $3, $4)
   RETURNING *;
   `;
@@ -278,8 +305,7 @@ const updateUser = function(updatedUserInfo) {
 
 const searchResources = function (keyword) {
   const query = `
-    SELECT id, title, description
-    FROM resources
+    SELECT id
     WHERE title ILIKE '%' || $1 || '%' OR description ILIKE '%' || $1 || '%';
   `;
   const values = [keyword];
@@ -293,6 +319,21 @@ const searchResources = function (keyword) {
     });
 };
 
+const getComments = function (resource_id) {
+  const query = `SELECT comments.comment_text FROM comments
+  JOIN resources
+  ON comments.resource_id = resources.id
+  WHERE resources.id = $1;
+  `;
+  const values = [resource_id];
+  return db.query(query, values)
+  .then((result) => {
+    return result.rows;
+  })
+  .catch(err => {
+    console.log(err.message);
+  });
+}
 
 module.exports = {
   getUsers,
@@ -307,5 +348,7 @@ module.exports = {
   getUser,
   updateUser,
   searchResources,
+  getResourceById,
+  getComments,
 };
 
