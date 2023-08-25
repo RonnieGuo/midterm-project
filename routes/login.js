@@ -75,16 +75,15 @@ router.get("/resources/:id", (req, res) => {
   let resource ="";
   let comments="";
   getUserResources(resourceId).then((results) => {
-    results.forEach(element => {
-      resource = element;
-      comments = element.comments_count;
-      console.log('element', element);
-      // res.render("main", {resource, comments, results, user: {} });
-    })
+    // results.forEach(element => {
+    //   resource = element;
+    //   comments = element.comments_count;
+    //   console.log('element', element);
+      res.render("main", {resource, comments, results, user: {} });
     // console.log('results', results[0].comments_count);
     // let resource = results[0];
     // let comments = results[0].comments_count;
-    res.render("main", {resource: resource, comments: comments, user: {} });
+    // res.render("main", {results, resource: resource, comments: comments, user: {} });
   });
 });
 

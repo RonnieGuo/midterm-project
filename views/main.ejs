@@ -11,7 +11,18 @@
       <div class="col-md-8 resource-field">
         <!-- <img src="<%= resource.img %>" width="500" height="333"> -->
         <br><br>
-        <p><%= resource.description %></p>
+        <% for (let element of results) { %>
+          <tr>
+            <td><%= element.title %></td><br>
+            <td><%= element.description %></td><br>
+            <td><%= element.url %></td><br>
+            <td><%= element.category %></td><br>
+            <td><%= element.likes_count %></td><br>
+            <td><%= element.comments_count %></td><br>
+
+          </tr>
+        <% } %>
+        <!-- <p><%= resource.description %></p>
         <div class="rate">
           <form action="/resources/<%= resource.id %>/rate" method="POST">
             <div class="rate form-group">
@@ -29,7 +40,7 @@
               </div>
               <button type="submit" class="btn btn-success btn-sm rate-button">Rate</button>
             </form>
-        </div>
+        </div> -->
 
 
       </div>
