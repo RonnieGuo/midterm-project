@@ -1,8 +1,16 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Source Sans 3',sans-serif;
+}
+
+
 body {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  justify-content: start;
+  align-items: start;
   min-height: 100vh;
 
   background: rgb(163, 208, 219);
@@ -15,4 +23,92 @@ body {
     rgba(163, 208, 219, 1) 74%,
     rgba(163, 208, 219, 1) 100%
   );
+}
+
+
+.container {
+  width: 100%;
+  min-height: 100vh;
+  padding: 10px 3%;
+}
+
+nav {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  // padding: 10px 0;
+}
+
+
+.logo {
+width: 120px;
+cursor: pointer;
+}
+
+
+nav ul {
+  list-style: none;
+  width: 100%;
+  text-align: right;
+  padding-right: 60px;
+}
+
+nav ul li {
+  display: inline-block;
+  margin: 10px 20px;
+}
+
+
+nav ul li a {
+  color: black;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.btn {
+  color: black;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  padding: 10px 10px;
+  border: 0;
+  outline: 0;
+  border-radius: 5px;
+  background: turquoise;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+
+.content {
+  margin-top: 10%;
+  color: black;
+  max-width: 620px;
+}
+
+.content h1 {
+  font-size: 50px;
+  font-weight: 600;
+  line-height: 60px;
+  margin-bottom: 10px;
+}
+
+
+.content form {
+  display: flex;
+  align-items: center;
+  background: white;
+  border-radius: 5px;
+  padding: 5px;
+  margin-top: 20px;
+}
+
+
+.content form input {
+  border: 0;
+  outline: 0;
+  width: 100%;
+  font-size: 16px;
+  padding-left: 10px;
 }

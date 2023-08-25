@@ -9,6 +9,7 @@
 
     <link rel="stylesheet" href="/styles/header.css">
     <link rel="stylesheet" href="/styles/login.css">
+    <link rel="stylesheet" href="/styles/profile.css" />
 
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
@@ -22,45 +23,25 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300;0,600;1,300;1,600&display=swap" rel="stylesheet">
 
-
-    <title>Login</title>
-  </head>
-
-
   <body>
+    <title>Update Profile</title>
+  </head>
+  <body>
+    <div class="wrap">
+    <h1 class="title">Update Your Profile</h1>
 
+    <form method="post" action="/users/<%= user.id %>/update">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" value="<%= user.name %>" required><br>
 
-    <main class="wrap" style="margin: 1em;">
-      <form method="POST" action="/login">
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" value="<%= user.email %>" required><br>
 
-        <h1>Login</h1>
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required><br>
 
-        <div class="input-box">
-            <h6>Email Address</h6>
-            <input type="email" name="email" placeholder="Email" required>
-            <i class='bx bxs-user' ></i>
-        </div>
-
-        <div class="input-box">
-          <h6>Password</h6>
-          <input type="password" name="password" placeholder="Password" required>
-          <i class='bx bxs-lock-alt'></i>
-        </div>
-
-        <button type="submit" class="btn">Login</button>
-
-        <div class="register-link">
-          <p>
-            Don't have an account?
-            <a href="/users/register">Register</a>
-          </p>
-        </div>
-
-      </form>
-
-        </div>
-      </form>
-    </main>
-
+      <input type="submit" value="Update Profile">
+    </form>
+    </div>
   </body>
 </html>

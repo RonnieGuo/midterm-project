@@ -1,41 +1,97 @@
-<header>
-  <nav class="navbar navbar-expand-md navbar-dark bg-success">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300;0,600;1,300;1,600&display=swap" rel="stylesheet">
+
+
+  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" />
+  <link rel="stylesheet" href="/vendor/border-box.css" />
+  <link rel="stylesheet" href="/styles/main.css" />
+  <link rel="stylesheet" href="/styles/layout.css" />
+  <link rel="stylesheet" href="/styles/header.css" />
+
+  <script src="/vendor/jquery-3.0.0.js"></script>
+  <script defer src="/scripts/app.js"></script>
+
+</head>
+
+
+<div class="container">
+  <nav>
+    <img src="images/logo.png" class="logo">
+    <ul>
+      <li><a href="#">My Resource</a></li>
+      <li><a href="#">Create New Resource</a></li>
+      <li><a href="#">Search Resource</a></li>
+    </ul>
+    <button type="submit" class="btn">Logout</button>
+  </nav>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <header class="page-header">
+  <nav >
     <a class="navbar-brand" href="/urls">Resource Wall</a>
     <button
-      class="navbar-toggler"
-      type="button"
-      data-toggle="collapse"
-      data-target="#navbarNavAltMarkup"
-      aria-controls="navbarNavAltMarkup"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarNavAltMarkup"
+    aria-controls="navbarNavAltMarkup"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
     >
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
-        <a class="nav-item nav-link" href="/urls">My Resource</a>
-        <a class="nav-item nav-link" href="/urls/new">Create Resource</a>
-      </div>
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link" href="/urls">My Resource</a>
+      <a class="nav-item nav-link" href="/urls/new">Create Resource</a>
     </div>
- 
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav ml-auto text-right">
-        <% if (user && user.id) { %>
-         
-          <p class="navbar-text">
-            Sign in as: <strong><%= user.email %></strong>
-            <form action="/logout" method="POST" class="d-inline">
-              <button class="btn btn-outline-secondary" type="submit">Logout</button>
-            </form>
-          </p>
-          <% } else { %>
-            <p class="navbar-text">Please login or register: |</p>
-            <a class="nav-item nav-link" href="/register">Register |</a>
-            <a class="nav-item nav-link" href="/login">Login</a>
-           
+  </div>
+
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav ml-auto text-right"> -->
+      <% if (user && user.id) { %>
+
+        <p class="navbar-text">
+          Sign in as: <strong><%= user.email %></strong>
+          <form action="/logout" method="POST" class="d-inline">
+            <button class="btn btn-outline-secondary" type="submit">Logout</button>
+          </form>
+        </p>
+        <% } else { %>
+          <p class="navbar-text">Please login or register: |</p>
+          <a class="nav-item nav-link" href="/register">Register |</a>
+          <a class="nav-item nav-link" href="/login">Login</a>
+
           <% } %>
+        </div>
       </div>
-    </div>
-  </nav>
-</header>
+    </nav>
+  </header>
+  </html>
