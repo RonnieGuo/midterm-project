@@ -35,8 +35,8 @@
         <li><a href="/homepage">Search Resource</a></li>
       </ul>
       <% if (user && user.id) { %>
-        <h2 class="navbar-brand">Sign in as: <%= user.email %><</h2>
-        <form method="POST" action="/logout" class="form-inline">
+        <h2 class="navbar-brand">Sign in as: <strong><%= user.email %></strong></h2>
+        <form method="POST" action="/users/logout" class="form-inline">
           <button class="btn btn-primary" type="submit">Logout</button>
         </form>
         <% } else {%>
