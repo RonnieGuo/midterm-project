@@ -1,5 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Bungee&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300;0,600;1,300;1,600&display=swap');
 
+
+.row-justify-content-center {
+    margin-bottom: 100px;
+    margin-top: 160px;
+  }
+  
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: rgb(163, 208, 219);
+    background: linear-gradient(
+      227deg,
+      rgba(163, 208, 219, 1) 0%,
+      rgba(163, 176, 219, 1) 20%,
+      rgba(163, 173, 219, 1) 34%,
+      rgba(163, 219, 208, 1) 59%,
+      rgba(163, 208, 219, 1) 74%,
+      rgba(163, 208, 219, 1) 100%
+    );
+  }
 .container {
+  margin-top: 160px;
   width: 100%;
   padding: 10px 3%;
 }
