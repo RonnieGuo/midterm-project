@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Bungee&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300;0,600;1,300;1,600&display=swap');
 
 .row-justify-content-center {
     margin-bottom: 100px;
@@ -27,4 +29,73 @@ body {
     rgba(163, 208, 219, 1) 100%
   );
 }
+.container {
+  margin: 2rem auto;
+  max-width: 1200px;
+  padding: 0 15px;
+}
 
+.card-columns {
+  column-count: 3;
+  column-gap: 1rem;
+}
+
+.card {
+  margin-bottom: 1rem;
+  background-color: #fff;
+  border: none;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.card-img-top {
+  max-width: 100%;
+  height: auto;
+}
+
+.card-body {
+  padding: 1rem;
+}
+
+.card-title {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.badge {
+  font-size: 0.75rem;
+  padding: 0.25rem 0.5rem;
+}
+
+.card-text {
+  font-size: 0.875rem;
+  color: #333;
+}
+
+.text-center {
+  display: flex;
+  justify-content:center;
+  margin-top: 1rem;
+}
+.card a.btn {
+  margin-top: 1rem;
+  color: #fff;
+  background-color: #b1d4fa;
+  border: none;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  text-decoration: none;
+}
+
+.card a.btn:hover {
+  background-color: #0056b3;
+}
+
+.back-to-top {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  font-size: 1.5rem;
+  color: #007bff;
+  cursor: pointer;
+  display: none;
+}
