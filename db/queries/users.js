@@ -240,7 +240,7 @@ const comment = function(userId, resourceId, text, rating) {
 
 //like posts
 const like = function (userId, resourceId) {
-  const query = `INSERT INTO likes (userId, resourceId)
+  const query = `INSERT INTO likes (user_id, resource_id)
   VALUES ($1, $2)
   RETURNING *;
   `;

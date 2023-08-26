@@ -1,24 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Create Resource</title>
-  <meta charset="UTF-8" >
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" >
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resources</title>
 
-  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" />
-  <link rel="stylesheet" href="/vendor/border-box.css" />
-  <link rel="stylesheet" href="/styles/resource.css" />
-  <script src="/vendor/jquery-3.0.0.js"></script>
-  <script defer src="/scripts/app.js"></script>
+  <link rel="stylesheet" href="/styles/resource.css">
+
+
 </head>
 
-<header>
-  <%- include('partials/_header') %>
-</header>
-<body>
+
+<%- include('partials/_header') %>
+
 <div   class="container resources">
-  <div class="row justify-content-center">
+  <div class="row-justify-content-center">
     <% if (results.length > 0) { %>
       <div class="card-columns">
         <% results.forEach(function(resource, index) { %>
@@ -29,49 +25,55 @@
             <a class="nav-link active hide" href="#">
               <% if (resource.likes) { %>
                 <i class="fa fa-heart" data-likes="<%=  resource.id %>"></i>
-              <% } else { %>
-                <i class="far fa-heart" data-likes="<%=  resource.id %>"></i>
-              <% } %>
-              <span class="like"><%= resource.likes %></span>
-              <span>
-                  <% if (resource.avg) { %>
-                    <% for ( i = 0; i < resource.avg; i += 1){ %>
-                      <i class="fas fa-star"></i>
-                    <% } %>
-                  <% } else { %>
-                    <i class="far fa-star"></i>
+                <% } else { %>
+                  <i class="far fa-heart" data-likes="<%=  resource.id %>"></i>
                   <% } %>
-                </span>
-            </a>
-            <div class="card-body">
-              <h5 class="card-title"><%= resource.title %></h5>
-              <div class="badge badge-secondary font-weight-light font-size-small"><%= resource.topic %></div>
-              <br>
-              <div class="toggle">
-                <p class="card-text"><%= resource.description %></p>
-                <hr>
-                <div class="text-center">
-                  <a href="<%= resource.url %>" target="_blank" class="btn btn-sm"><i class="fas fa-link"></i> Visit</a>
-                  <a href="/resources/<%= resource.id%>" class="btn btn-sm"><i class="fas fa-info-circle"></i> More</a>
+                  <span class="like"><%= resource.likes %></span>
+                  <span>
+                    <% if (resource.avg) { %>
+                      <% for ( i = 0; i < resource.avg; i += 1){ %>
+                        <i class="fas fa-star"></i>
+                        <% } %>
+                        <% } else { %>
+                          <i class="far fa-star"></i>
+                          <% } %>
+                        </span>
+                      </a>
+                      <div class="card-body">
+                        <h5 class="card-title"><%= resource.title %></h5>
+                        <div class="badge badge-secondary font-weight-light font-size-small"><%= resource.topic %></div>
+                        <br>
+                        <div class="toggle">
+                          <p class="card-text"><%= resource.description %></p>
+                          <hr>
+                          <div class="text-center">
+                            <a href="<%= resource.url %>" target="_blank" class="btn btn-sm"><i class="fas fa-link"></i> Visit</a>
+                            <a href="/resources/<%= resource.id%>" class="btn btn-sm"><i class="fas fa-info-circle"></i> More</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <% }) %>
+                  </div>
+                  <% } else { %>
+                    <div class="jumbotron">
+                      <h1 class="display-4">Hello !</h1>
+                      <p class="lead">We see you haven't created any resources. Click the button below to start sharing!</p>
+                      <hr class="my-4">
+                      <form action="/resources/new" method="GET">
+                        <button class="btn" type="button">Create Resources</button>
+                        <!-- <span id="error-message" class="error-message-box">
+                          Please Login or Register to create resources.
+                        </span> -->
+                      </form>
+                    </div>
+                    <% } %>
+
+                  </div>
                 </div>
-              </div>
-            </div>
-          </div>
-        <% }) %>
-      </div>
-    <% } else { %>
-      <div class="jumbotron">
-          <h1 class="display-4">Hello !</h1>
-          <p class="lead">We see you haven't created any resources. Click the button below to start sharing!</p>
-          <hr class="my-4">
-          <a class="btn btn-primary btn-lg" href="/resources/new" role="button">Create Resources</a>
-      </div>
-    <% } %>
 
-  </div>
-</div>
+                <div class="back-to-top hide">
+                  <i class="far fa-arrow-alt-circle-up"></i>
+                </div>
 
-<div class="back-to-top hide">
-  <i class="far fa-arrow-alt-circle-up"></i>
-</div>
-</body>
+</html>

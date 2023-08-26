@@ -17,26 +17,18 @@
   <script defer src="/scripts/app.js"></script>
 </head>
 
+<header>
+  <%- include('partials/_header') %>
+</header>
+
 <body>
 
 
     <div class="container">
-      <nav>
-        <img src="images/logo.png" class="logo">
-        <ul>
-          <li><a href="#">My Resource</a></li>
-          <li><a href="#">Create New Resource</a></li>
-          <li><a href="#">Search Resource</a></li>
-        </ul>
-        <form method="GET" action="/users/login">
-        <button  type="submit" class="btn">Login</button>
-      </form>
-      </nav>
-
       <div class="content">
         <h1>Welcome<br> to Resource Wall</h1>
         <p>Where ideas are made and shared with the world</p>
-        <form method="GET" action="/resources/search">
+        <form method="GET" action="/resources">
           <input type="text" name="text" placeholder="Resource Name">
           <button type="submit" class="btn">Search</button>
         </form>

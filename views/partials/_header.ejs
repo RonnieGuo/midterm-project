@@ -26,77 +26,28 @@
 
 
     <nav>
-      <input type="checkbox" id="check">
-      <label for="check" class="checkbtn">
-        <i class="fas fa-bars"></i>
-      </label>
-      <img src="/images/logo.png" class="logo">
+      <form method="GET" action="/homepage">
+        <img src="/images/logo.png" class="logo">
+      </form>
       <ul>
-        <li><a href="#">My Resource</a></li>
+        <li><a href="/resources">My Resource</a></li>
         <li><a href="/resources/new">Create New Resource</a></li>
         <li><a href="/homepage">Search Resource</a></li>
       </ul>
-
-    </nav>
-
-
-</body>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- <header class="page-header">
-  <nav >
-    <a class="navbar-brand" href="/urls">Resource Wall</a>
-    <button
-    class="navbar-toggler"
-    type="button"
-    data-toggle="collapse"
-    data-target="#navbarNavAltMarkup"
-    aria-controls="navbarNavAltMarkup"
-    aria-expanded="false"
-    aria-label="Toggle navigation"
-    >
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-    <div class="navbar-nav">
-      <a class="nav-item nav-link" href="/urls">My Resource</a>
-      <a class="nav-item nav-link" href="/urls/new">Create Resource</a>
-    </div>
-  </div>
-
-  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-    <div class="navbar-nav ml-auto text-right"> -->
-      <!-- <% if (user && user.id) { %>
-
-        <p class="navbar-text">
-          Sign in as: <strong><%= user.email %></strong>
-          <form action="/logout" method="POST" class="d-inline">
-            <button class="btn btn-outline-secondary" type="submit">Logout</button>
+      <% if (user && user.id) { %>
+        <h2 class="navbar-brand">Sign in as: <strong><%= user.email %></strong></h2>
+        <form method="POST" action="/users/logout" class="form-inline">
+          <button class="btn btn-primary" type="submit">Logout</button>
+        </form>
+        <% } else {%>
+          <form method="GET" action="/users/login">
+            <button  type="submit" class="btn">Login</button>
           </form>
-        </p>
-        <% } else { %>
-          <p class="navbar-text">Please login or register: |</p>
-          <a class="nav-item nav-link" href="/register">Register |</a>
-          <a class="nav-item nav-link" href="/login">Login</a>
-
+          <form method="GET" action="/users/register">
+            <button  type="submit" class="btn">Register</button>
+          </form>
           <% } %>
-        </div>
-      </div>
+
     </nav>
-  </header> -->
-  </html>
+  </body>
+</html>
