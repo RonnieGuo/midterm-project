@@ -1,4 +1,17 @@
-<!--<% include partials/_header %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Main</title>
+
+  <link rel="stylesheet" href="/styles/main.css">
+
+
+</head>
+
+
+<%- include('partials/_header') %>
 <body>
 
   <main class="container">
@@ -9,7 +22,6 @@
     <div class="row">
 
       <div class="col-md-8 resource-field">
-        <img src="<%= resource.img %>" width="500" height="333"> -->
         <br><br>
         <% for (let element of results) { %>
           <tr>
