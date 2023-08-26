@@ -60,7 +60,12 @@
                       <h1 class="display-4">Hello !</h1>
                       <p class="lead">We see you haven't created any resources. Click the button below to start sharing!</p>
                       <hr class="my-4">
-                        <button class="btn" href="/resources/new" role="button">Create Resources</button>
+                      <form action="/resources/new" method="GET">
+                        <button class="btn" type="button">Create Resources</button>
+                        <span id="error-message" class="error-message-box">
+                          Please Login or Register to create resources.
+                        </span>
+                      </form>
                     </div>
                     <% } %>
 
