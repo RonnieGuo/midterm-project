@@ -26,16 +26,18 @@
 
 
     <nav>
-      <input type="checkbox" id="check">
-      <label for="check" class="checkbtn">
-        <i class="fas fa-bars"></i>
-      </label>
       <img src="/images/logo.png" class="logo">
       <ul>
         <li><a href="#">My Resource</a></li>
         <li><a href="/resources/new">Create New Resource</a></li>
         <li><a href="/homepage">Search Resource</a></li>
       </ul>
+      <form method="GET" action="/users/login">
+        <button  type="submit" class="btn">Login</button>
+      </form>
+      <form method="GET" action="/users/register">
+        <button  type="submit" class="btn">Register</button>
+      </form>
 
     </nav>
 
