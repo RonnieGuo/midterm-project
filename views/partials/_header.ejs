@@ -13,6 +13,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300;0,600;1,300;1,600&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="/styles/header.css" />
+    <link rel="stylesheet" href="/styles/header.css" />
+
 
 
   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
@@ -34,11 +36,12 @@
         <li><a href="/resources/new">Create New Resource</a></li>
         <li><a href="/homepage">Search Resource</a></li>
       </ul>
-      <% if (user && user.id) { %>
+      <% if (user) { %>
         <h2 class="navbar-brand">Sign in as: <strong><%= user.email %></strong></h2>
         <form method="POST" action="/users/logout" class="form-inline">
           <button class="btn btn-primary" type="submit">Logout</button>
         </form>
+        <a class="profile" href="/users/profile"> Profile</a>
         <% } else {%>
           <form method="GET" action="/users/login">
             <button  type="submit" class="btn">Login</button>

@@ -11,7 +11,6 @@
     <link rel="stylesheet" href="/styles/login.css">
     <link rel="stylesheet" href="/styles/profile.css" />
 
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
 
 <!-- Font -->
@@ -36,7 +35,7 @@
     <div class="wrapp">
     <h1 class="title">Update Your Profile</h1>
 
-    <form method="post" action="users/<%= user.id %>/update">
+    <form method="post" action="/users/<%= user.id %>/update">
       <label for="name">Name:</label>
       <input type="text" id="name" name="name" value="<%= user.name %>" required><br>
 

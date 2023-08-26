@@ -21,7 +21,7 @@
           <!-- start from 4th element apply hideme class for scroll -->
 
           <div class="card hideme" data-resourceId="<%= resource.id %>">
-            <img class="card-img-top" src="<%= resource.img%>>" alt="Card image cap">
+            <!-- <img class="card-img-top" src="<%= resource.img%>>" alt="Card image cap"> -->
             <a class="nav-link active hide" href="#">
               <% if (resource.likes) { %>
                 <i class="fa fa-heart" data-likes="<%=  resource.id %>"></i>
@@ -60,11 +60,9 @@
                       <h1 class="display-4">Hello !</h1>
                       <p class="lead">We see you haven't created any resources. Click the button below to start sharing!</p>
                       <hr class="my-4">
-                      <form action="/resources/new" method="GET">
-                        <button class="btn" type="button">Create Resources</button>
-                        <!-- <span id="error-message" class="error-message-box">
-                          Please Login or Register to create resources.
-                        </span> -->
+                      <form action="/login" method="GET">
+                        <button class="btn-btn" type="button">Create Resources</button>
+
                       </form>
                     </div>
                     <% } %>
