@@ -135,20 +135,20 @@ router.post('/logout', (req, res) => {
 //     res.redirect("back");
 //   });
 // });
-// **********************note sure if likes route is correct**********************************
-//add like
-router.post("/resources/:id/like", (req, res) => {
-  if (!req.session.user_id) {
-    const message = "Please login to like posts";
-    res.json({ message });
-  } else {
-    const userId = req.session.user_id;
-    const resourceId = req.body.resource_id;
-    like(userId, resourceId).then(() => {
-      res.redirect("back");
-    });
-  }
-});
+
+// //add like
+// router.post("/resources/:id/like", (req, res) => {
+//   if (!req.session.user_id) {
+//     const message = "Please login to like posts";
+//     res.json({ message });
+//   } else {
+//     const userId = req.session.user_id;
+//     const resourceId = req.body.resource_id;
+//     like(userId, resourceId).then(() => {
+//       res.redirect("back");
+//     });
+//   }
+// });
 
 //user profile page
 router.get('/', (req, res) => {
