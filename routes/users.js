@@ -45,8 +45,8 @@ router.get('/register', (req, res) => {
 
 //logout
 router.post('/logout', (req, res) => {
-  req.session = null;
-  res.redirect('/');
+  req.session.user_id = null;
+  res.redirect('/homepage');
 });
 
 // //register new user
@@ -151,7 +151,7 @@ router.post('/logout', (req, res) => {
 // });
 
 //user profile page
-router.get('/', (req, res) => {
+router.get('/profile', (req, res) => {
   // const currentUser = {
   //   id: req.session.user_id,
   //   user_id: req.params.id

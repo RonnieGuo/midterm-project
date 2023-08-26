@@ -3,11 +3,11 @@
   @import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300;0,600;1,300;1,600&display=swap');
 
 
-  // main {
-  //   margin: 120px 350px;
-  //   margin-bottom: 100px;
-  //   margin-top: 160px;
-  // }
+  main {
+    margin: 120px 250px;
+    margin-bottom: 100px;
+    margin-top: 160px;
+  }
 
 
   .wrap {
@@ -24,12 +24,13 @@
   .wrap h1 {
     font-size: 36px;
     text-align: center;
+    font-weight: 600;
   }
 
   .wrap h6 {
     font-size: 15px;
     text-align: start;
-    font-weight: 600
+    font-weight: 600;
   }
 
   .wrap .input-box {
@@ -59,25 +60,23 @@
   .input-box i {
     position: absolute;
     right: 20px;
-    top: 90%;
-    transform: translateY(-50%);
+    top: 80%;
     font-size: 20px;
   }
 
-  .wrap .btn {
+  .wrap .btn-btn {
     width: 100%;
-    height: 45px;
+    height: 55px;
     background: white;
     border: none;
     outline: none;
-    border-radius: 40px;
+    border-radius: 50px;
     box-shadow: 0 0 10px rgba(0, 0, 0, .1);
     cursor: pointer;
     font-size: 16px;
-    text-align: center;
     color: black;
     font-weight: 600;
-    // margin-top: 20px;
+    margin-top: 20px;
   }
 
   .wrap .register-link {
@@ -96,16 +95,3 @@
   text-decoration: underline;
 }
 
-
-// @media only screen and (max-width: 1024px) {
-
-//   body {
-//     font-size: 30px;
-//     padding-left: 50px;
-//     height: 100px;
-//     }
-
-//     nav ul li a {
-//     font-size: 16px;
-//     }
-//   }
