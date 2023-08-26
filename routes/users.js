@@ -15,9 +15,9 @@ const { comment } = require('../db/queries/users');
 const { like, getUser, updateUser, searchResources } = require('../db/queries/users');
 
 //homepage
-router.get("/", (req, res) => {
-  res.render("users");
-});
+// router.get("/", (req, res) => {
+//   res.render("users");
+// });
 
 //login page
 router.get('/login', (req, res) => {
@@ -151,7 +151,7 @@ router.post("/resources/:id/like", (req, res) => {
 });
 
 //user profile page
-router.get('/users', (req, res) => {
+router.get('/', (req, res) => {
   // const currentUser = {
   //   id: req.session.user_id,
   //   user_id: req.params.id
@@ -162,22 +162,23 @@ router.get('/users', (req, res) => {
   }
   getUser(req.session.user_id)
   .then((user) => {
+    console.log('hello');
     // res.status(200).send("ok");
     res.render('profile', { user });
   })
 })
 
 //user update profile page
-router.post("/users/:id/update", (req, res) => {
+router.post("/:id/update", (req, res) => {
   const updatedUserInfo = {
     name: req.body.name,
     email: req.body.email,
     password: req.body.password,
     id: req.session.user_id,
   };
-  updateUser(updatedUserInfo).then(() => {
+  updateUser(updatedUserInfo).then((user) => {
     // res.status(200).send("ok");
-    res.render('profile', {user: null});
+    res.render('profile', {user});
   });
 });
 

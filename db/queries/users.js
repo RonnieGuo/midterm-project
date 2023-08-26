@@ -10,9 +10,9 @@ const getUsers = () => {
 
 //Get a single user from the database given their email.
 
-const getUserWithEmail = function (email) {
-  const query = 'SELECT * from users WHERE LOWER(email) = LOWER($1)';
-  const values = [email];
+const getUserWithEmail = function (email, password) {
+  const query = 'SELECT * from users WHERE LOWER(email) = LOWER($1) AND password = $2';
+  const values = [email, password];
   return db.query(query, values)
     .then(result => {
       if (result.rows.length > 0) {
@@ -144,15 +144,19 @@ const getResourceById = (resource_id) => {
   resources.url,
   resources.category,
   COUNT(likes.id) AS likes_count,
+  likes.*,
   COUNT(comments.id) AS comments_count
 FROM resources
 LEFT JOIN likes ON resources.id = likes.resource_id
 LEFT JOIN comments ON resources.id = comments.resource_id
 WHERE resources.id = $1
-GROUP BY resources.id
+GROUP BY resources.id, likes.id
 ORDER BY resources.id;`
 return db.query(query, values)
-    .then(result => result.rows)
+    .then(result => {
+      console.log('likes', result.rows);
+      return result.rows;
+    })
     .catch(err => {
       console.error(err.message);
       throw err;
@@ -252,7 +256,7 @@ const like = function (userId, resourceId) {
 // get user profile page
 
 const getUser = function(user_id) {
-  console.log('user', user);
+  // console.log('user', user);
     const query = `SELECT * FROM users
     WHERE id = $1
     LIMIT 1;
@@ -270,10 +274,10 @@ const getUser = function(user_id) {
 
 const updateUser = function(updatedUserInfo) {
   const query = `UPDATE users
-  SET name = $1, email = $2, password = $3
+  SET username = $1, email = $2, password = $3
   WHERE id = $4;
   `;
-  const values = updatedUserInfo;
+  const values = [updatedUserInfo.name, updatedUserInfo.email, updatedUserInfo.password, updatedUserInfo.id];
   return db.query(query, values);
 }
 

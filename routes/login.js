@@ -32,7 +32,7 @@ router.get('/homepage', (req, res) => {
 router.post('/login', (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
-  getUserWithEmail(email).then((user) => {
+  getUserWithEmail(email, password).then((user) => {
     if (!user) {
       return res.send({ error: "no user with that id" });
     }
@@ -79,30 +79,33 @@ router.get('/resources', (req, res) => {
   })
 });
 
+//New Resource page
+router.get('/resources/new', (req, res) => {
+  // res.status(200).send("ok");
+  res.render('create_resource', {user: {}});
+});
+
 //view one resource
-router.get("/resources/:id", (req, res) => {
+router.get("/resources/:id", async (req, res) => {
   const resourceId = req.params.id;
-  let resource ="";
+  const userId = req.session.user_id;
+  // console.log(userId,'userid');
+  // let resource ="";
   // let comments="";
-  let comments = getComments(resourceId);
+  let comments = await getComments(resourceId);
+  // console.log('comments--', comments)
   getResourceById(resourceId).then((results) => {
     // results.forEach(element => {
     //   resource = element;
     //   comments = element.comments_count;
-      console.log('results----', results);
+      // console.log('results----', results);
       // console.log('comments--', comments1);
-      res.render("main", {resource: results[0], comments, results, user: {} });
+      res.render("main", {resource: results[0], userId, comments, results, user: {} });
     // console.log('results', results[0].comments_count);
     // let resource = results[0];
     // let comments = results[0].comments_count;
     // res.render("main", {results, resource: resource, comments: comments, user: {} });
   });
-});
-
-//New Resource page
-router.get('/resources/new', (req, res) => {
-  // res.status(200).send("ok");
-  res.render('create_resource', {user: {}});
 });
 
 

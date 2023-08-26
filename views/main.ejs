@@ -18,12 +18,18 @@
             <td><%= element.url %></td><br>
             <td><%= element.category %></td><br>
             <td><%= element.likes_count %></td><br>
-            <td><%= element.comments_count %></td><br>
+            <td><% if(userId === element.user_id) { %>
+            <button>unlike</button>
+              <% } else { %>
+                <button>like</button>
+                <% } %>
+
+            </td>
+            <!-- <td><%= element.comments_count %></td><br> -->
             <!-- <td><%=  %></td><br> -->
 
           </tr>
         <% } %>
-        <p><%= comments.comment_text %></p>
 
         <!-- <p><%= resource.description %></p>
         <div class="rate">
@@ -63,7 +69,7 @@
               <p><%= comments[i].comment_text %></p>
               <small>
                 <strong><%= comments[i].created_at%></strong>
-                  -  <%= comments[i].name %>
+                  <%= comments[i].name %>
               </small>
             </div>
             <hr>
