@@ -8,49 +8,44 @@
 
   <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" />
   <link rel="stylesheet" href="/vendor/border-box.css" />
-  <link rel="stylesheet" href="/styles/main.css" />
-  <link rel="stylesheet" href="/styles/layout.css" />
-  <link rel="stylesheet" href="/styles/resource.css" />
   <link rel="stylesheet" href="/styles/create_resource.css" />
   <script src="/vendor/jquery-3.0.0.js"></script>
   <script defer src="/scripts/app.js"></script>
 </head>
 
-
-<!-- <header>
+<header>
   <%- include('partials/_header') %>
-</header> -->
-
+</header>
 
 <body>
 
-  <main role="main" class="wrapper" >
-    <div class=" newform ">
-      <div class="justify-content-center align-items-center">
-        <form class="" action="/resources/new" method="post">
-          <h2 class="text-center">Create Resource</h2>
+  <main class="wrap" >
+  
+     
+        <form action="/resources/new" method="post">
 
-          <div class="form-group">
-            <label for="title">Title</label>
-            <input type="text" name="title" class="form-control" placeholder="Enter title" required>
+          <h1>Create Resource</h1>
+
+          <div class="input-box">
+            <h6>Title<h6>
+            <input type="text" name="title" placeholder="Enter title" required>
           </div>
-          <div class="form-group">
-            <label for="description">Description</label>
-            <textarea class="form-control" name="description" rows="3" required></textarea>
+        
+          <div class="input-box">
+            <h6>Description</h6>
+            <input type="text" name="description" required>
           </div>
-          <div class="form-group">
-            <label for="url">Url</label>
-            <input type="text" name="url" class="form-control" value="http://" required>
+          <div class="input-box">
+            <h6>Url</h6>
+            <input type="text" name="url" value="http://" required>
           </div>
-          <div class="form-group">
-            <label for="category">Category</label>
-            <input type="text" name="category" class="form-control" required>
+          <div class="input-box">
+            <h6>Category</h6>
+            <input type="text" name="category" required>
           </div>
 
-          <button type="submit" class="btn btn-primary" >Create Resource</button>
+          <button type="submit" class="btn">Create Resource</button>
         </form>
-      </div>
-    </div>
   </main>
 </body>
 </html>
